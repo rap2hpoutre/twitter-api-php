@@ -322,4 +322,15 @@ class TwitterAPIExchangeTest extends \PHPUnit_Framework_TestCase
         /** If we get this back, then it looks like we can support PUT! :-) **/
         $this->assertContains('UNAUTHORIZED_CLIENT_APPLICATION', $data);
     }
+
+    public function testBug210()
+    {
+        $url    = 'https://api.twitter.com/1.1/followers/ids.json';
+        $method = 'GET';
+        $params = '?screen_name=hatta28328506';
+
+        $data = $this->exchange->request($url, $method, $params);
+
+        $this->assertContains('ids', $data);
+    }
 }
